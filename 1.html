@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="video-js.6.0.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="video.6.0.js"></script>
+</head>
+<body>
+
+<video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"
+       data-setup='' poster="http://vjs.zencdn.net/v/oceans.png">
+  <!--<source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">-->
+</video>
+<script>
+  videojs.options.flash.swf = 'video-js.swf'
+  // Create a player.
+  var player = videojs('example_video_1',{
+    height: '439px',
+    width: '640px',
+    'techOrder': ['html5', 'flash'],
+    controls: true,
+    'autoplay': true,
+    sources: [{
+      /*rtmp://live.hkstv.hk.lxdns.com/live/hks*/
+      src: 'rtmp://live.hkstv.hk.lxdns.com/live/hks',
+      type: 'rtmp/flv'
+    }]
+  },function(){
+    console.log(this)
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>绘制坐标</title>
+		<link rel="stylesheet" type="text/css" href="../gis/css/ol.css" />
+		<link rel="stylesheet" type="text/css" href="coorcss/gis.css"/>
+		<!--基础js-->
+		<script type="text/javascript" src="../gis/js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="../gis/js/ol.js" ></script>
+		
+		<!--基础配置和工具js-->
+		<script type="text/javascript" src="../gis/js/gislib/HConfig.js" ></script>
+		<script type="text/javascript" src="coorjs/coorTool.js"></script>
+		<script type="text/javascript" src="../gis/js/gislib/HUtil.js" ></script>
+		<script type="text/javascript" src="../gis/js/gislib/HSymbol.js" ></script>  
+		
+		<!--最后引入js -->
+		<script type="text/javascript" src="coorjs/coorMap.js" ></script>
+		<script type="text/javascript" src="../gis/js/gis.js" ></script>
+		
+		<script type="text/javascript">
+			
+			$(function(){
+				/**
+				 * 图画类型 type
+				 * Point:点
+				 * LineString:线
+				 * Polygon:面
+				 * Circle:圆
+				 */
+				//1.先定义一个原要素图层
+				var preLayer = new ol.layer.Vector({
+			    	source : new ol.source.Vector()
+			    });
+				//获取图画类型参数
+				var afterUrl = window.location.search.substring(1);
+				var typeParameter = afterUrl.match(/=(\S*)&/)[1];
+				if(typeParameter=='Point'){
+					$("#edit").attr("value","绘制点");
+					$("#edit").attr("editType","Point");
+					
+					var aftercoor = afterUrl.split("&")[1].split("=")[1];
+					if(aftercoor !='nocoor'){
+						var afterlon = parseFloat(aftercoor.split(',')[0]);
+						var afterlat = parseFloat(aftercoor.split(',')[1]);
+						var lonlat = wgs84ToWebMct(afterlon,afterlat);
+						//2.获取要素坐标后向preLayer添加要素
+						var prePoint = HSymbol.getMarkerSymbol({'type':"point"},lonlat,[255,106,106]);
+						preLayer.getSource().addFeatures([prePoint]);
+						
+						//3.在map中添加图层
+					    coorapp.map.addLayer(preLayer);
+					}else{}
+					
+				}else if(typeParameter=='LineString'){
+					$("#edit").attr("value","绘制线");
+					$("#edit").attr("editType","LineString");
+				}else if(typeParameter=='Polygon'){
+					$("#edit").attr("value","绘制面");
+					$("#edit").attr("editType","Polygon");
+				}else if(typeParameter=='Circle'){
+					$("#edit").attr("value","绘制圆");
+					$("#edit").attr("editType","Circle");
+				}
+				$("#edit").css("visibility","visible");
+				
+				//4.定位
+				var targetFeature = preLayer.getSource().getFeatures()[0];
+				if(targetFeature){
+					var mapView = coorapp.map.getView();
+					mapView.fit(targetFeature.getGeometry(),coorapp.map.getSize(),{duration:2000});
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div id="coorMap">
+			<div class="yaosu">
+				<input type="button"  id="edit" value="" editType="" style="visibility:hidden" onclick="drawFeature()"/>
+				<div class="computed" id="coor"></div>
+			</div>
+		</div>
+	</body>
+</html>

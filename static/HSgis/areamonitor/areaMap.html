@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>区域布控</title>
+  <link rel="stylesheet" type="text/css" href="../gis/css/ol.css"/>
+  <link rel="stylesheet" type="text/css" href="areacss/gis.css"/>
+  <link rel="stylesheet" type="text/css" href="areacss/olpopup.css"/>
+  <!--基础js-->
+  <script type="text/javascript" src="../gis/js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../gis/js/ol.js"></script>
+
+  <!--基础配置和工具js-->
+  <script type="text/javascript" src="../gis/js/gislib/HConfig.js"></script>
+  <script type="text/javascript" src="../gis/js/gislib/HTool.js"></script>
+  <script type="text/javascript" src="../gis/js/gislib/HUtil.js"></script>
+  <script type="text/javascript" src="../gis/js/gislib/HSymbol.js"></script>
+  <script type="text/javascript" src="areajs/areaTool.js"></script>
+
+
+  <!--业务工具js-->
+  <script type="text/javascript" src="../gis/js/gislib/HInfoLayer.js"></script>
+
+  <!--最后引入js -->
+  <script type="text/javascript" src="areajs/areaMap.js"></script>
+  <script type="text/javascript" src="../gis/js/gis.js"></script>
+  <script type="text/javascript">
+    // $(function () {
+    //   var border = ''
+    //   var border = '{"brushColor":"","fillColor":"","brushThickness":10,"pointList":[{"x":120.0626941673857,"y":30.86996488847116},{"x":120.0620114233919,"y":30.86629799190679},{"x":120.07119920857289,"y":30.86592962012},{"x":120.07158934687536,"y":30.870316501365295},{"x":120.0626941673857,"y":30.86996488847116}]}'
+    //   addPreMonitorArea(border);
+    // })
+
+  </script>
+</head>
+<body>
+<div id="areaMap" style="width: 100%;">
+  <div class="yaosu">
+    <!--<input type="button" value="绘制区域" onclick="drawArea()"/>-->
+    <!--<input type="button" value="绘制箭头" onclick="drawArrow()"/>-->
+  </div>
+</div>
+<!--公用弹出框-->
+<div id="popup" class="ol-popup">
+  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+  <div id="popup-content"></div>
+</div>
+</body>
+</html>

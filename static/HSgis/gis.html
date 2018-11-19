@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>港航</title>
+  <link rel="stylesheet" href="gis/css/ol.css"/>
+  <link rel="stylesheet" type="text/css" href="gis/css/gis.css"/>
+  <!--基础js-->
+  <script type="text/javascript" src="gis/js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="gis/js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="gis/js/ol.js"></script>
+
+  <!--基础配置和工具js-->
+  <script type="text/javascript" src="gis/js/gislib/HConfig.js"></script>
+  <script type="text/javascript" src="gis/js/gislib/HTool.js"></script>
+  <script type="text/javascript" src="gis/js/gislib/HUtil.js"></script>
+  <script type="text/javascript" src="gis/js/gislib/HSymbol.js"></script>
+  <script type="text/javascript" src="gis/js/gislib/HShip.js"></script>
+
+  <!--业务工具js-->
+  <script type="text/javascript" src="gis/js/gislib/HInfoLayer.js"></script>
+
+  <!--最后引入初始化和业务js(页面渲染完成后) -->
+  <script type="text/javascript" src="gis/js/gislib/HMap.js"></script>
+  <script type="text/javascript">
+    setTimeout(function () {
+      loadShip();
+      setInterval('loadShip()', 10000); //加载船舶
+      loadInfoLayer();				//分图层加载要素
+
+      showPopup(app.map);				//显示弹出框
+    }, 0)
+    setTimeout(function () {
+      //初始化地图后显示不同船舶类型位置
+      var gpsInitHeatMap = createHeatMap('initshipGPS', app.GIS_GPS, 0.2, 2.5, ['#00C800', '#00C900'], 10, false);
+      var aisInitHeatMap = createHeatMap('initshipAIS', app.GIS_AIS, 0.2, 2.5, ['#00C800', '#00C900'], 10, false);
+      var mixedInitHeatMap = createHeatMap('initshipMIXED', app.GIS_MIXED, 0.2, 2.5, ['#00C800', '#00C900'], 10);
+      app.map.addLayer(gpsInitHeatMap);
+      app.map.addLayer(aisInitHeatMap);
+      app.map.addLayer(mixedInitHeatMap);
+    }, 9000)
+  </script>
+</head>
+<body>
+<!--地图容器-->
+<div id="map">
+  <div class="yaosu">
+		<!--<table>
+			<tr>
+				<td>要素</td>
+				<td><input type="checkbox" value="choiceall" checked="checked" id="checkAll"> 全选</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" value="shipin"name="checks" checked="checked" id="shipinCheck"> 视频</td>
+				<td><input type="checkbox" value="matou" name="checks" checked="checked" id="matouCheck"> 码头</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" value="hszs" name="checks" checked="checked" id="hszsCheck"> 海事站所</td>
+				<td><input type="checkbox" value="support" name="checks" checked="checked" id="supportCheck"> 紧急物资</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" value="aisBase" name="checks" checked="checked" id="aisCheck"> AIS基站</td>
+				<td><input type="checkbox" value="vhfBase" name="checks" checked="checked" id="baseCheck"> VHF基站</td>
+			</tr
+			<tr>
+				<td><input type="checkbox" value="marea" name="checks" checked="checked" id="aisCheck"> 监控区域</td>
+			</tr>
+		</table>-->
+    <!--<select id="sign" onchange="signChange()">-->
+      <!--<option value="AIS_GPS" selected="selected">AIS、GPS混合图层</option>-->
+      <!--<option value="AIS">AIS船舶图层</option>-->
+      <!--<option value="GPS">GPS船舶图层</option>-->
+    <!--</select>-->
+    <!--<input id="DZDT" type="button" value="电子地图" onclick="openDZDT()">-->
+    <!--<input id="YXT" type="button" value="卫星影像图" onclick="openYXT()">-->
+    <!--<input id="DZHDT" type="checkbox" value='电子航道图' name="close" onclick="closeDZHDT()"/><label>电子航道图</label>-->
+    <div class="computed" id="coor">
+      <!--<input type="button" value="清除绘制" onclick="clearFeature()">-->
+      <!--<input type="button" value="计算到达时间" onclick="calArriveTime()">-->
+      <!--<input type="text" id="arriveTime"/>-->
+      <!--<input type="button" value="海巡艇速度">-->
+      <!--<input type="text" id="hxSpeed" value="11km/h"/>-->
+    </div>
+    <!--<div class="lon">111</div>-->
+  </div>
+</div>
+<!--闪烁点公用div-->
+<div id="css_animation" style="display: none;"></div>
+</body>
+<script type="text/javascript" src="gis/js/gis.js"></script>
+</html>
