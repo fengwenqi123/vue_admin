@@ -20,13 +20,7 @@
                       <div class="grid-content bg-purple"><span>用户名称:</span><span>{{item.userName}}</span></div>
                     </el-col>
                     <el-col :span="12">
-                      <div class="grid-content bg-purple"><span>经度:</span><span>{{item.latitude}}</span></div>
-                    </el-col>
-                    <el-col :span="12">
-                      <div class="grid-content bg-purple"><span>纬度:</span><span>{{item.longitude}}</span></div>
-                    </el-col>
-                    <el-col :span="12">
-                      <div class="grid-content bg-purple"><span>备注:</span><span>{{item.description}}</span></div>
+                      <div class="grid-content bg-purple"><span>所属单位:</span><span>{{item.city}}</span></div>
                     </el-col>
                   </el-row>
                 </div>
@@ -225,6 +219,9 @@
                 span {
                   margin: 8px 0;
                 }
+              }
+              .el-row{
+                margin-top: 20px;
               }
             }
             .right {

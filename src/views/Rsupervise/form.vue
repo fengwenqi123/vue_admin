@@ -12,7 +12,6 @@
     <el-form-item label="区域描述">
       <el-input
         type="textarea"
-        :autosize=autosize
         placeholder="请输入内容"
         v-model="formLabelAlign.description">
       </el-input>

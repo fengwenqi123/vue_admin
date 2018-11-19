@@ -140,6 +140,22 @@ export default new Router({
 })
 export const asyncRouterMap = [
   {
+    path: '/cruise',
+    component: Layout,
+    alwaysShow: true,
+    redirect: '/cruise/cruise',
+    name: 'cruise',
+    meta: {title: '一键巡航', icon: 'example', roles: ['cbgl']},
+    children: [
+      {
+        path: 'cruise',
+        name: 'cruise',
+        component: () => import('@/views/cruise/index'),
+        meta: {title: '一键巡航', icon: 'tree', roles: ['cbgl:bgdjcb']}
+      }
+    ]
+  },
+  {
     path: '/shipManage',
     component: Layout,
     alwaysShow: true,

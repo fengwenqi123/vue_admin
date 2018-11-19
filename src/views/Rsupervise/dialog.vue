@@ -1,11 +1,11 @@
 <template>
-  <el-dialog title="新增核查规则" :visible.sync="dias" :before-close="handleClose">
+  <el-dialog title="新增核查规则" :visible.sync="dias" :before-close="handleClose" width="80%">
     <el-scrollbar class="scrolls">
       <el-table :data="gridData" v-if="dias" @select="selectes">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column property="name" label="规则名称" width="150"></el-table-column>
         <el-table-column property="rule" label="规则内容"></el-table-column>
-        <el-table-column property="type" label="动静态" width="100">
+        <el-table-column property="type" label="动静态" width="80">
           <template slot-scope="scope">
             <p>{{scope.row.type===1?'动态':'静态'}}</p>
           </template>

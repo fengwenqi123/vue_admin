@@ -1,25 +1,47 @@
 <template>
   <el-tabs type="border-card">
-    <el-tab-pane label="AIS">
+    <el-tab-pane label="船舶违章处罚信息">
       <el-scrollbar class="scrolls">
-        <el-row>
-          <el-col :span="12"><span>信号接收时间</span></el-col>
-          <el-col :span="12"><span>{{ais.receiveTime}}</span></el-col>
-          <el-col :span="12"><span>航向</span></el-col>
-          <el-col :span="12"><span>{{ais.shipDirection}}</span></el-col>
-          <el-col :span="12"><span>纬度</span></el-col>
-          <el-col :span="12"><span>{{ais.shipLat}}</span></el-col>
-          <el-col :span="12"><span>经度</span></el-col>
-          <el-col :span="12"><span>{{ais.shipLon}}</span></el-col>
-          <el-col :span="12"><span>船舶信息</span></el-col>
-          <el-col :span="12"><span>{{ais.shipMessage}}</span></el-col>
-          <el-col :span="12"><span>船舶名称</span></el-col>
-          <el-col :span="12"><span>{{ais.shipName}}</span></el-col>
-          <el-col :span="12"><span>速度</span></el-col>
-          <el-col :span="12"><span>{{ais.shipSpeed}}</span></el-col>
-          <el-col :span="12"><span>船艏向</span></el-col>
-          <el-col :span="12"><span>{{ais.shipheadDirection}}</span></el-col>
+        <el-row v-for="(item,index) in chufaList" :key="index">
+          <el-col :span="8"><span>添加时间</span></el-col>
+          <el-col :span="16"><span>{{item.addTimeString}}</span></el-col>
+          <el-col :span="8"><span>更新时间</span></el-col>
+          <el-col :span="16"><span>{{item.modifyTimeString}}</span></el-col>
+          <el-col :span="8"><span>违章录入时间</span></el-col>
+          <el-col :span="16"><span>{{item.addDate}}</span></el-col>
+          <el-col :span="8"><span>违章内容</span></el-col>
+          <el-col :span="16"><span>{{item.content}}</span></el-col>
+          <el-col :span="8"><span>违章录入单位</span></el-col>
+          <el-col :span="16"><span>{{item.dockName}}</span></el-col>
+          <el-col :span="8"><span>中文船名</span></el-col>
+          <el-col :span="16"><span>{{item.shipName}}</span></el-col>
+          <el-col :span="8"><span>违章处理状态(未处理/已处理)</span></el-col>
+          <el-col :span="16"><span>{{item.status}}</span></el-col>
+          <el-col :span="8"><span>违章时间</span></el-col>
+          <el-col :span="16"><span>{{item.violationDate}}</span></el-col>
+          <el-col :span="8"><span>违章处理结果</span></el-col>
+          <el-col :span="16"><span>{{item.whyRemove}}</span></el-col>
+          <el-col :span="8"><span>违章类型</span></el-col>
+          <el-col :span="16"><span>{{item.gcvTypeName}}</span></el-col>
+          <el-col :span="8"><span>违章标记(违章/黑名单)</span></el-col>
+          <el-col :span="16"><span>{{item.flag}}</span></el-col>
+          <el-col :span="24">
+            <hr>
+          </el-col>
         </el-row>
+      </el-scrollbar>
+    </el-tab-pane>
+    <el-tab-pane label="船舶持证信息">
+      <el-scrollbar class="scrolls">
+        <tree v-if="zhzsListobj" :zhzsListobj="zhzsListobj"></tree>
+      </el-scrollbar>
+    </el-tab-pane>
+    <el-tab-pane label="船舶检验信息">
+      <el-scrollbar class="scrolls">
+      </el-scrollbar>
+    </el-tab-pane>
+    <el-tab-pane label="电子报告">
+      <el-scrollbar class="scrolls">
       </el-scrollbar>
     </el-tab-pane>
     <el-tab-pane label="船舶基本信息">
@@ -64,48 +86,26 @@
         </el-row>
       </el-scrollbar>
     </el-tab-pane>
-    <el-tab-pane label="船舶违章处罚信息">
+    <el-tab-pane label="AIS">
       <el-scrollbar class="scrolls">
-        <el-row v-for="(item,index) in chufaList" :key="index">
-          <el-col :span="8"><span>添加时间</span></el-col>
-          <el-col :span="16"><span>{{item.addTimeString}}</span></el-col>
-          <el-col :span="8"><span>更新时间</span></el-col>
-          <el-col :span="16"><span>{{item.modifyTimeString}}</span></el-col>
-          <el-col :span="8"><span>违章录入时间</span></el-col>
-          <el-col :span="16"><span>{{item.addDate}}</span></el-col>
-          <el-col :span="8"><span>违章内容</span></el-col>
-          <el-col :span="16"><span>{{item.content}}</span></el-col>
-          <el-col :span="8"><span>违章录入单位</span></el-col>
-          <el-col :span="16"><span>{{item.dockName}}</span></el-col>
-          <el-col :span="8"><span>中文船名</span></el-col>
-          <el-col :span="16"><span>{{item.shipName}}</span></el-col>
-          <el-col :span="8"><span>违章处理状态(未处理/已处理)</span></el-col>
-          <el-col :span="16"><span>{{item.status}}</span></el-col>
-          <el-col :span="8"><span>违章时间</span></el-col>
-          <el-col :span="16"><span>{{item.violationDate}}</span></el-col>
-          <el-col :span="8"><span>违章处理结果</span></el-col>
-          <el-col :span="16"><span>{{item.whyRemove}}</span></el-col>
-          <el-col :span="8"><span>违章类型</span></el-col>
-          <el-col :span="16"><span>{{item.gcvTypeName}}</span></el-col>
-          <el-col :span="8"><span>违章标记(违章/黑名单)</span></el-col>
-          <el-col :span="16"><span>{{item.flag}}</span></el-col>
-          <el-col :span="24">
-            <hr>
-          </el-col>
+        <el-row>
+          <el-col :span="12"><span>信号接收时间</span></el-col>
+          <el-col :span="12"><span>{{ais.receiveTime}}</span></el-col>
+          <el-col :span="12"><span>航向</span></el-col>
+          <el-col :span="12"><span>{{ais.shipDirection}}</span></el-col>
+          <el-col :span="12"><span>纬度</span></el-col>
+          <el-col :span="12"><span>{{ais.shipLat}}</span></el-col>
+          <el-col :span="12"><span>经度</span></el-col>
+          <el-col :span="12"><span>{{ais.shipLon}}</span></el-col>
+          <el-col :span="12"><span>船舶信息</span></el-col>
+          <el-col :span="12"><span>{{ais.shipMessage}}</span></el-col>
+          <el-col :span="12"><span>船舶名称</span></el-col>
+          <el-col :span="12"><span>{{ais.shipName}}</span></el-col>
+          <el-col :span="12"><span>速度</span></el-col>
+          <el-col :span="12"><span>{{ais.shipSpeed}}</span></el-col>
+          <el-col :span="12"><span>船艏向</span></el-col>
+          <el-col :span="12"><span>{{ais.shipheadDirection}}</span></el-col>
         </el-row>
-      </el-scrollbar>
-    </el-tab-pane>
-    <el-tab-pane label="船舶持证信息">
-      <el-scrollbar class="scrolls">
-        <tree v-if="zhzsListobj" :zhzsListobj="zhzsListobj"></tree>
-      </el-scrollbar>
-    </el-tab-pane>
-    <el-tab-pane label="船舶检验信息">
-      <el-scrollbar class="scrolls">
-      </el-scrollbar>
-    </el-tab-pane>
-    <el-tab-pane label="电子报告">
-      <el-scrollbar class="scrolls">
       </el-scrollbar>
     </el-tab-pane>
   </el-tabs>

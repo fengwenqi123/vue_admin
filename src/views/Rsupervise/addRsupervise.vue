@@ -1,7 +1,7 @@
 <template>
   <div class="add-rsupervise">
     <el-row :gutter="20" style="height: 100%;">
-      <el-col :span="9">
+      <el-col :span="6">
         <div class="main">
           <div class="title">
             <p v-if="!mod">新增监管区域</p>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="15">
+      <el-col :span="18">
         <div class="map">
           <iframes></iframes>
         </div>
@@ -78,7 +78,7 @@
   .add-rsupervise {
     .map {
       position: relative;
-      height: 600px;
+      height: 682px;
     }
     height: 680px;
     .title {

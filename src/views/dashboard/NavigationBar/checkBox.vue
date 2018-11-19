@@ -3,7 +3,9 @@
     <div style="display: inline-block; margin-top: 4px;">
       船舶种类
     </div>
-    <el-checkbox :indeterminate="isIndeterminate" style="float: right;" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+    <el-checkbox :indeterminate="isIndeterminate" style="float: right;" v-model="checkAll"
+                 @change="handleCheckAllChange">全选
+    </el-checkbox>
     <div style="width: 100%; height: 10px;"></div>
     <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
       <el-row :gutter="20">
@@ -19,6 +21,10 @@
   </div>
 </template>
 <script>
+  /* eslint-disable object-curly-spacing */
+
+  import {setShip, getShip} from '@/utils/auth.js'
+
   const cityOptions = [
     {
       name: '海巡艇',
@@ -56,7 +62,13 @@
         isIndeterminate: true
       }
     },
+    created() {
+      this.ship()
+    },
     methods: {
+      ship() {
+        this.checkedCities = getShip().split(',')
+      },
       handleCheckAllChange(val) {
         console.log(val)
         if (val) {
@@ -74,13 +86,19 @@
         this.checkAll = checkedCount === this.cities.length
         this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length
       }
+    },
+    watch: {
+      checkedCities() {
+        setShip(this.checkedCities.join(','))
+      }
     }
   }
 </script>
 <style scoped lang="scss">
-  .grid-content{
+  .grid-content {
     text-align: center;
   }
+
   .svg-icon {
     margin-left: 10px;
     font-size: 35px;

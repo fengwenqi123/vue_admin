@@ -100,13 +100,13 @@
               prop="startTimeStr"
               label="通过时间">
             </el-table-column>
-            <el-table-column
-              width="80"
-              label="航速">
-              <template slot-scope="scope">
-                {{(scope.row.speed*1.852).toFixed(2)}}
-              </template>
-            </el-table-column>
+            <!--<el-table-column-->
+              <!--width="80"-->
+              <!--label="航速">-->
+              <!--<template slot-scope="scope">-->
+                <!--{{(scope.row.speed*1.852).toFixed(2)}}-->
+              <!--</template>-->
+            <!--</el-table-column>-->
             <el-table-column
               width="80"
               label="核查结果">

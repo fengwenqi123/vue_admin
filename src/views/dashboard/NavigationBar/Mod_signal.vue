@@ -53,7 +53,6 @@
           this.active = parseInt(getSignal())
           setTimeout(() => {
             $('iframe[name="hqdtgisFrame"]').get(0).contentWindow.signChange(this.obj[this.active].active)
-            // alert(this.obj[this.active].active)
           }, 2000)
         }
       }

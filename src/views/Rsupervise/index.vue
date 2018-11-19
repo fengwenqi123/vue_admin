@@ -38,7 +38,7 @@
               prop="name"
               label="区域名称">
               <template slot-scope="scope">
-                <div class="nei" @click="openDetails(scope.row)">{{scope.row.name}}</div>
+                <div>{{scope.row.name}}</div>
               </template>
             </el-table-column>
             <el-table-column
@@ -155,15 +155,6 @@
             id: id
           }
         })
-      },
-      // table表格操作
-      openDetails(row) {
-        this.$confirm(`<div>
-      <p><span class="font">名称:</span><span>${row.name}</span></p>
-      <p><span class="font">状态:</span><span>${row.status === 1 ? '启用' : '禁用'}</span></p>
-      <p><span class="font">备注:</span><span>${row.description}</span></p>
-      <p><span class="font">更新时间:</span><span>${row.modifyTimeString}</span></p>
-  </div>`, '查看', {dangerouslyUseHTMLString: true, showCancelButton: false})
       },
       handleSelectionChange(val) {
         this.mul_0 = val

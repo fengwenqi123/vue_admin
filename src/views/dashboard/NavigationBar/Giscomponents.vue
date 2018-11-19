@@ -70,7 +70,6 @@
         this.display = true
       },
       leave1() {
-        // alert(1211)
         this.display = false
       },
       playback() {

@@ -11,7 +11,7 @@
       <p class="p1">{{item.name}}<i @click="close(index)" class="el-icon-circle-close-outline"></i></p>
       <rtmp class="rtmps" :rtmps="item.rtmp" ref="rtmp"></rtmp>
     </div>
-    <div class="tabs" v-focus1 v-if="shipName">
+    <div class="tabs" v-if="shipName">
       <p class="p1">{{shipName}}<i @click="shipName=null" class="el-icon-circle-close-outline"></i></p>
       <tabs :name="shipName" :ais="aisList"></tabs>
     </div>
@@ -305,11 +305,8 @@
     .tabs {
       position: fixed;
       width: 520px;
-      height: 240px;
-      margin-left: -260px;
-      margin-top: -120px;
-      top: 50%;
-      left: 50%;
+      bottom: 20px;
+      right: 20px;
       z-index: 9999;
       p {
         background: #ccc;

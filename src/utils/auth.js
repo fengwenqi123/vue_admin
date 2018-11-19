@@ -4,6 +4,9 @@ const TokenKey = 'Admin-Token'
 const userName = 'userName'
 const passWord = 'passWord'
 const signal = 'signal'
+const yaoshu = 'yaoshu'
+const ship = 'ship'
+const swi = 'swi'
 
 export function getToken() {
   return Cookies.get(TokenKey)
@@ -47,4 +50,28 @@ export function setSignal(obj) {
 
 export function getSignal() {
   return Cookies.get(signal)
+}
+
+export function setYaoshu(obj) {
+  return Cookies.set(yaoshu, obj)
+}
+
+export function getYaoshu() {
+  return Cookies.get(yaoshu)
+}
+
+export function setShip(obj) {
+  return Cookies.set(ship, obj)
+}
+
+export function getShip() {
+  return Cookies.get(ship)
+}
+
+export function setSwi(obj) {
+  return Cookies.set(swi, obj)
+}
+
+export function getSwi() {
+  return Cookies.get(swi)
 }

@@ -35,7 +35,7 @@
               label="中文船名"
               width="120">
               <template slot-scope="scope">
-                <div @click="link(scope.row)" style="cursor: pointer;">{{scope.row.zwcm}}</div>
+                <span @click="link(scope.row)" style="cursor: pointer;">{{scope.row.zwcm}}</span>
               </template>
             </el-table-column>
             <el-table-column

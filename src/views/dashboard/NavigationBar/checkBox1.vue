@@ -20,6 +20,7 @@
 </template>
 <script>
   /* eslint-disable object-curly-spacing,no-undef */
+  import {setYaoshu, getYaoshu} from '@/utils/auth.js'
 
   const cityOptions = [
     {name: '视频', value: 'shipin'},
@@ -40,7 +41,16 @@
         isIndeterminate: true
       }
     },
+    created() {
+      this.yaoshu()
+    },
     methods: {
+      yaoshu() {
+        this.checkedCities = getYaoshu().split(',')
+        setTimeout(() => {
+          this.settping()
+        }, 1600)
+      },
       handleCheckAllChange(val) {
         if (val) {
           this.checkedCities = []
@@ -102,7 +112,10 @@
     },
     watch: {
       checkedCities() {
-        this.settping()
+        setTimeout(() => {
+          this.settping()
+        }, 1600)
+        setYaoshu(this.checkedCities.join(','))
       }
     }
   }

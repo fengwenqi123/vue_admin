@@ -22,10 +22,11 @@
 </template>
 
 <script>
-  /* eslint-disable no-undef */
+  /* eslint-disable no-undef,object-curly-spacing */
 
   import checkBoxs from '@/views/dashboard/NavigationBar/checkBox.vue'
   import checkBoxs1 from '@/views/dashboard/NavigationBar/checkBox1.vue'
+  import {setSwi, getSwi} from '@/utils/auth.js'
 
   const img1 = require('@/assets/img/2d.png')
   const img2 = require('@/assets/img/sat.png')
@@ -42,7 +43,22 @@
         ]
       }
     },
+    created() {
+      this.getSwis()
+    },
     methods: {
+      setSwis() {
+        setSwi(this.swi)
+      },
+      getSwis() {
+        setTimeout(() => {
+          if (getSwi() === 'true') {
+            this.swi = true
+          } else {
+            this.swi = false
+          }
+        }, 1500)
+      },
       set(item, index) {
         this.active = index
         if (index === 0) {
@@ -54,6 +70,7 @@
     },
     watch: {
       swi() {
+        this.setSwis()
         if (this.swi) {
           $('iframe[name="hqdtgisFrame"]').get(0).contentWindow.showInfoLayer('DZHDT', true)
         } else {
@@ -74,7 +91,7 @@
     z-index: 999;
     padding: 10px;
     background: #fff;
-    .ship{
+    .ship {
       margin-top: 14px;
     }
     p {
