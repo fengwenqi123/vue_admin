@@ -73,7 +73,7 @@
           lon: 122.2036,
           lat: 29.9878
         }],
-        value: '湖州市'
+        value: '5'
       }
     },
     methods: {

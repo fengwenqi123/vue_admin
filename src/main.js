@@ -18,6 +18,7 @@ import './errorLog'// error log
 import './permission' // permission control
 // import './mock' // simulation data
 import * as filters from './filters' // global filters
+import '@/utils/fontSize.js'
 import VueVideoPlayer from 'vue-video-player'
 import 'vue-video-player/src/custom-theme.css'
 import 'video.js/dist/video-js.css'

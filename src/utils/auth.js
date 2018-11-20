@@ -7,6 +7,7 @@ const signal = 'signal'
 const yaoshu = 'yaoshu'
 const ship = 'ship'
 const swi = 'swi'
+const hangdao = 'hangdao'
 
 export function getToken() {
   return Cookies.get(TokenKey)
@@ -74,4 +75,11 @@ export function setSwi(obj) {
 
 export function getSwi() {
   return Cookies.get(swi)
+}
+export function setHangDao(obj) {
+  return Cookies.set(hangdao, obj)
+}
+
+export function getHangDao() {
+  return Cookies.get(hangdao)
 }

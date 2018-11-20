@@ -46,10 +46,9 @@
     },
     methods: {
       yaoshu() {
-        this.checkedCities = getYaoshu().split(',')
         setTimeout(() => {
-          this.settping()
-        }, 1600)
+          this.checkedCities = getYaoshu().split(',')
+        }, 1500)
       },
       handleCheckAllChange(val) {
         if (val) {
@@ -112,9 +111,7 @@
     },
     watch: {
       checkedCities() {
-        setTimeout(() => {
-          this.settping()
-        }, 1600)
+        this.settping()
         setYaoshu(this.checkedCities.join(','))
       }
     }

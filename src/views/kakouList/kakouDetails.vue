@@ -885,7 +885,7 @@
     data() {
       return {
         restaurants: [],
-        rtmps: 'rtmp://202.69.69.180:443/webcast/bshdlive-pc',
+        rtmps: 'rtmp://10.100.70.228:1935/00a0008900b2000b001d006000f50072/1',
         data: [],
         state: '',
         Check: {},
@@ -921,7 +921,7 @@
       Magnifier, rtmp
     },
     mounted() {
-      this.getRtmp()
+      // this.getRtmp()
     },
     created() {
       this.getQuery()
@@ -1015,7 +1015,8 @@
       // 视频回放
       playbacks() {
         playback(this.shipCheckId).then(response => {
-
+          this.rtmps = response.data
+          this.$refs.rtmp.getUser(this.rtmps)
         })
       }
     }
@@ -1088,7 +1089,7 @@
         margin-top: 15px;
       }
     }
-    .active{
+    .active {
       color: red;
     }
 

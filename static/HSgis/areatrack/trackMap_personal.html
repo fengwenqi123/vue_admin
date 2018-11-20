@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>区域轨迹</title>
+  <link rel="stylesheet" type="text/css" href="../gis/css/ol.css"/>
+  <link rel="stylesheet" type="text/css" href="trackcss/gis.css"/>
+  <link rel="stylesheet" type="text/css" href="trackcss/olpopup.css"/>
+  <!--基础js-->
+  <script type="text/javascript" src="../gis/js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../gis/js/ol.js"></script>
+
+  <!--基础配置和工具js-->
+  <script type="text/javascript" src="../gis/js/gislib/HConfig.js"></script>
+  <script type="text/javascript" src="trackjs/trackTool.js"></script>
+  <script type="text/javascript" src="../gis/js/gislib/HUtil.js"></script>
+  <script type="text/javascript" src="../gis/js/gislib/HSymbol.js"></script>
+  <script type="text/javascript" src="../gis/js/gislib/HShip.js"></script>
+
+  <!--业务工具js-->
+  <script type="text/javascript" src="../gis/js/gislib/HInfoLayer.js"></script>
+
+  <!--最后引入js -->
+  <script type="text/javascript" src="trackjs/trackMap.js"></script>
+  <script type="text/javascript" src="../gis/js/gis.js"></script>
+  <link rel="stylesheet" href="trackcss/index.css">
+</head>
+<body>
+<div id="trackMap">
+  <div class="yaosu">
+    <div class="list"
+         style="position: fixed; left: 26px;  background: #fff; display: inline-block;padding: 10px;">
+      <p style="color: #ccc;">船名：</p>
+      <div class="ship">
+        <el-input v-model="shipName" placeholder="请输入船名"></el-input>
+      </div>
+      <br>
+      <p style="color: #ccc;">起止时间：</p>
+      <div class="time">
+        <el-date-picker
+          v-model="value4"
+          type="datetimerange"
+          range-separator="至"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期">
+        </el-date-picker>
+      </div>
+      <div class="buttons" style="margin-top: 15px;">
+        <el-row>
+          <img src="./img/play.png" alt="" style="cursor: pointer;width: 45px; margin-left: 15px;background: #fff;"
+               @click="startPlays">
+        </el-row>
+      </div>
+    </div>
+    <input id="DZDT" type="button" value="电子地图" onclick="openDZDT()">
+    <input id="YXT" type="button" value="卫星影像图" onclick="openYXT()">
+    <input id="DZHDT" type="checkbox" value="电子航道图" name="close" onclick="closeDZHDT()"/><label>电子航道图</label>
+  </div>
+</div>
+<!--公用弹出框-->
+<div id="popup" class="ol-popup">
+  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+  <div id="popup-content"></div>
+</div>
+</body>
+<script type="text/javascript" src="trackjs/vue.js"></script>
+<script type="text/javascript" src="trackjs/index.js"></script>
+<script>
+  new Vue({
+    el: '#trackMap',
+    data: function () {
+      return {
+        shipName: null,
+        value4: null,
+        time: null,
+        time1: null
+      }
+    },
+    methods: {
+      startPlays() {
+        if (!this.shipName) {
+          this.$message('请先输入船名')
+          return
+        }
+        if (!this.value4) {
+          this.$message('请先选择时间')
+          return
+        }
+        this.time = this.value4[0]
+        this.time1 = this.value4[1]
+        addHistoryTrack(this.shipName, this.time, this.time1)
+      },
+      getTime() {
+        var time = Date.parse(new Date())
+        var time1 = time - 1800000
+        this.time = this.getMyDate(time).split(' ')[1]
+        this.time1 = this.getMyDate(time1).split(' ')[1]
+      },
+      // 时间戳转字符串
+      getMyDate(str) {
+        var oDate = new Date(str),
+          oYear = oDate.getFullYear(),
+          oMonth = oDate.getMonth() + 1,
+          oDay = oDate.getDate(),
+          oHour = oDate.getHours(),
+          oMin = oDate.getMinutes(),
+          oSen = oDate.getSeconds(),
+          oTime = oYear + '-' + this.getzf(oMonth) + '-' + this.getzf(oDay) + ' ' + this.getzf(oHour) + ':' + this.getzf(oMin) + ':' + this.getzf(oSen);//最后拼接时间
+        return oTime
+      },
+      // 补0操作
+      getzf(num) {
+        if (parseInt(num) < 10) {
+          num = '0' + num
+        }
+        return num
+      }
+    }
+  })
+</script>
+</html>

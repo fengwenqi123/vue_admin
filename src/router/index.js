@@ -677,12 +677,12 @@ export const asyncRouterMap = [
     alwaysShow: true,
     meta: {title: '系统管理', icon: 'example', roles: ['sys']},
     children: [
-      {
-        path: 'AccountManagement',
-        name: 'AccountManagement',
-        component: () => import('@/views/AccountManagement/index'),
-        meta: {title: '系统账号管理', icon: 'tree', roles: ['sys:member']}
-      },
+      // {
+      //   path: 'AccountManagement',
+      //   name: 'AccountManagement',
+      //   component: () => import('@/views/AccountManagement/index'),
+      //   meta: {title: '系统账号管理', icon: 'tree', roles: ['sys:member']}
+      // },
       {
         path: 'AuthorizeManagement',
         name: 'AuthorizeManagement',

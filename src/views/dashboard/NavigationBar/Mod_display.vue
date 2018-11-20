@@ -13,7 +13,7 @@
     <div class="map">
       <el-row :gutter="20">
         <el-col :span="12" v-for="(item,index) in imgs" :key="index">
-          <div class="grid-content bg-purple" @click="set(item,index)">
+          <div class="grid-content bg-purple" @click="sethangdao(item,index)">
             <img :class="{active:active===index}" :src="item" alt=""></div>
         </el-col>
       </el-row>
@@ -26,7 +26,7 @@
 
   import checkBoxs from '@/views/dashboard/NavigationBar/checkBox.vue'
   import checkBoxs1 from '@/views/dashboard/NavigationBar/checkBox1.vue'
-  import {setSwi, getSwi} from '@/utils/auth.js'
+  import {setSwi, getSwi, setHangDao, getHangDao} from '@/utils/auth.js'
 
   const img1 = require('@/assets/img/2d.png')
   const img2 = require('@/assets/img/sat.png')
@@ -37,7 +37,7 @@
     data() {
       return {
         swi: false,
-        active: null,
+        active: 0,
         imgs: [
           img1, img2
         ]
@@ -45,6 +45,7 @@
     },
     created() {
       this.getSwis()
+      this.gethangdao()
     },
     methods: {
       setSwis() {
@@ -59,12 +60,26 @@
           }
         }, 1500)
       },
-      set(item, index) {
+      sethangdao(item, index) {
         this.active = index
+        setHangDao(index)
         if (index === 0) {
           $('iframe[name="hqdtgisFrame"]').get(0).contentWindow.openDZDT()
         } else {
           $('iframe[name="hqdtgisFrame"]').get(0).contentWindow.openYXT()
+        }
+      },
+      gethangdao() {
+        if (getHangDao()) {
+          var hd = parseInt(getHangDao())
+          this.active = hd
+          setTimeout(() => {
+            if (hd === 0) {
+              $('iframe[name="hqdtgisFrame"]').get(0).contentWindow.openDZDT()
+            } else {
+              $('iframe[name="hqdtgisFrame"]').get(0).contentWindow.openYXT()
+            }
+          }, 1500)
         }
       }
     },

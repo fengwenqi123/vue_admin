@@ -6,7 +6,7 @@
           <selects></selects>
         </div>
       </li>
-      <li class="li"  @mouseenter="tabas" @mouseleave="leave">
+      <li class="li" @mouseenter="tabas" @mouseleave="leave">
         <div class="max">
           <svg-icon icon-class="signal"></svg-icon>
           信号设置
@@ -20,10 +20,9 @@
         </div>
         <Mod_display class="displays" v-show="display"></Mod_display>
       </li>
-      <li @click="playback()">
+      <li>
         <div class="max">
-          <svg-icon icon-class="trajectory"></svg-icon>
-          轨迹回放
+          <select_track></select_track>
         </div>
       </li>
     </ul>
@@ -34,13 +33,14 @@
   /* eslint-disable no-undef */
 
   import selects from '@/views/dashboard/NavigationBar/select.vue'
+  import select_track from '@/views/dashboard/NavigationBar/select_track.vue'
   import Mod_signal from '@/views/dashboard/NavigationBar/Mod_signal.vue'
   import Mod_display from '@/views/dashboard/NavigationBar/Mod_display.vue'
 
   export default {
     name: 'giscomponents',
     components: {
-      selects, Mod_signal, Mod_display
+      selects, Mod_signal, Mod_display, select_track
     },
     data() {
       return {
@@ -71,11 +71,6 @@
       },
       leave1() {
         this.display = false
-      },
-      playback() {
-        setTimeout(() => {
-          $('iframe[name="hqdtgisFrame"]').get(0).contentWindow.openWindow('../static/HSgis/areatrack/trackMap.html', 'width=1366,height=786,top=0px,left=0px')
-        }, 0)
       }
     }
   }
@@ -102,10 +97,10 @@
           cursor: pointer;
         }
         /*.displays {*/
-          /*display: none;*/
+        /*display: none;*/
         /*}*/
         /*.signal {*/
-          /*display: none;*/
+        /*display: none;*/
         /*}*/
       }
       li:last-child {
@@ -120,10 +115,10 @@
   }
 
   /*.li1:hover .displays {*/
-    /*display: block;*/
+  /*display: block;*/
   /*}*/
 
   /*.li:hover .signal {*/
-    /*display: block;*/
+  /*display: block;*/
   /*}*/
 </style>

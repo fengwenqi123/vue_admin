@@ -487,9 +487,6 @@ function stopPlay() {
  */
 function addHistoryTrack(shipName, minReceiveTime, maxReceiveTime) {
   trackapp.historyTrackLayer.clear();
-  var shipName = "浙桐乡槽00266";
-  var minReceiveTime = "2018-09-25 12:10:01";
-  var maxReceiveTime = "2018-09-25 15:10:01";
   var getUrl = GIS_HISTORYSHIP + "minReceiveTime=" + minReceiveTime + "&" + "maxReceiveTime=" + maxReceiveTime + "&"
     + "shipName=" + shipName + "&type=2";
   $.ajax({
@@ -501,6 +498,10 @@ function addHistoryTrack(shipName, minReceiveTime, maxReceiveTime) {
       var lineSymbol = [];
       var markerSymbol = [];
       var onePositionArray = [];
+      if (d.data.dataList.length === 0) {
+        alert('信号轨迹数据不存在')
+        return
+      }
       $.each(d.data.dataList, function (i, item) {
         //添加轨迹点(统一添加) 船名 接收时间 船速和船向
         var lonlat = wgs84ToWebMct(item['longitude'], item['latitude']);
