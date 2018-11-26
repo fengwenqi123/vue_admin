@@ -6,7 +6,7 @@
           <div class="text">
             <div class="span">
               <span>所属区域：</span>
-              <el-select v-model="sectionId" placeholder="请选择" clearable  :size="mini">
+              <el-select v-model="sectionId" placeholder="请选择" clearable :size="mini">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -17,7 +17,7 @@
             </div>
             <div class="span">
               <span>核查状态：</span>
-              <el-select v-model="alarmLevel" placeholder="请选择" clearable  :size="mini">
+              <el-select v-model="alarmLevel" placeholder="请选择" clearable :size="mini">
                 <el-option
                   v-for="item in options_gj"
                   :key="item.value"
@@ -86,7 +86,8 @@
               width="100"
               label="船舶类型">
               <template slot-scope="scope">
-                <p>{{scope.row.shipType==='1'?'客船':scope.row.shipType==='2'?'货船':scope.row.shipType==='3'?'危险品船':'其他'}}</p>
+                <p>
+                  {{scope.row.shipType==='1'?'客船':scope.row.shipType==='2'?'货船':scope.row.shipType==='3'?'危险品船':'其他'}}</p>
               </template>
             </el-table-column>
             <el-table-column
@@ -101,11 +102,11 @@
               label="通过时间">
             </el-table-column>
             <!--<el-table-column-->
-              <!--width="80"-->
-              <!--label="航速">-->
-              <!--<template slot-scope="scope">-->
-                <!--{{(scope.row.speed*1.852).toFixed(2)}}-->
-              <!--</template>-->
+            <!--width="80"-->
+            <!--label="航速">-->
+            <!--<template slot-scope="scope">-->
+            <!--{{(scope.row.speed*1.852).toFixed(2)}}-->
+            <!--</template>-->
             <!--</el-table-column>-->
             <el-table-column
               width="80"
@@ -231,7 +232,14 @@
           this.tableData.forEach((item, index) => {
             item.errorcor = []
             item.shipCheckTaskBeanList.forEach((items, indexs) => {
-              item.errorcor.push(items.itemName)
+              if (items.description !== '') {
+                var description = `${items.itemName}(${items.description})`
+                item.errorcor.push(description)
+              } else {
+                var descriptionw = `${items.itemName}`
+                item.errorcor.push(descriptionw)
+              }
+              // item.errorcor.push(items.itemName)
             })
           })
         }

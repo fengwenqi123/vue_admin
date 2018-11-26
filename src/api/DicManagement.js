@@ -50,3 +50,12 @@ export function disable(id) {
   return request.put('/account/dataDictionary/disable', data)
 }
 
+export function classification(classification, status) {
+  return request({
+    url: '/account/dataDictionary/findListByClassification',
+    method: 'GET',
+    params: {
+      classification, status
+    }
+  })
+}

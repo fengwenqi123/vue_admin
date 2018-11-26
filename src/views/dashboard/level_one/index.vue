@@ -5,21 +5,28 @@
       <search @show="show" @searchs="searchs" @hide="hide"></search>
     </div>
     <el-collapse-transition>
-    <div class="div" v-if="!flag">
-      <div class="list" v-if="list.length>0">
-        <ul>
-          <el-scrollbar class="scrolls">
-            <li v-for="(item,index) in list" :key="index">
-              <p><span>{{item.shipName}}</span>
-                <span @click="dingwei('mixedship',item.shipName)"><svg-icon icon-class="dingwei"></svg-icon></span>
-              </p>
-            </li>
-          </el-scrollbar>
-        </ul>
+      <div class="div" v-if="!flag">
+        <div class="list" v-if="factorData">
+          <ul>
+            <el-scrollbar class="scrolls">
+              <li v-for="(item,index) in factorData" :key="index">
+                <p>
+                  <span><svg-icon :icon-class="item.icon"></svg-icon></span>
+                  <span>{{item.name}}</span>
+                  <span v-if="item.type==='a'" @click="dingwei('aisship',item.name)"><svg-icon icon-class="dingwei"></svg-icon></span>
+                  <span v-if="item.type==='b'" @click="dingwei('support',item.name)"><svg-icon icon-class="dingwei"></svg-icon></span>
+                  <span v-if="item.type==='c'" @click="dingwei('matou',item.name)"><svg-icon icon-class="dingwei"></svg-icon></span>
+                  <span v-if="item.type==='d'" @click="dingwei('hszs',item.name)"><svg-icon icon-class="dingwei"></svg-icon></span>
+                  <span v-if="item.type==='e'" @click="dingwei('vhfBase',item.name)"><svg-icon icon-class="dingwei"></svg-icon></span>
+                  <span v-if="item.type==='f'" @click="dingwei('shipin',item.name)"><svg-icon icon-class="dingwei"></svg-icon></span>
+                </p>
+              </li>
+            </el-scrollbar>
+          </ul>
+        </div>
+        <!--列表-->
+        <collapse v-if="alarm&&grids" class="collapse" :alarm="alarm"></collapse>
       </div>
-      <!--列表-->
-      <collapse v-if="alarm&&grids" class="collapse" :alarm="alarm"></collapse>
-    </div>
     </el-collapse-transition>
     <!--隐藏显示模块-->
     <div @click="flag=!flag">
@@ -36,7 +43,7 @@
   import collapse from '@/components/Collapse/index'
   import grid from '@/components/grid/index'
   import showHide from '@/components/showHide/index'
-  import {lists} from '@/api/levelOne.js'
+  import {lists, searchys} from '@/api/levelOne.js'
   import {list} from '@/utils/list.js'
 
   export default {
@@ -53,7 +60,19 @@
         dataList: [],
         options2: list(),
         value2: '0',
-        shipName: null
+        shipName: null,
+        page: {
+          pageNum: 1,
+          pageSize: 10,
+          total: null
+        },
+        order: null,
+        sort: null,
+        type: null,
+        name: null,
+        latitude: null,
+        longitude: null,
+        factorData: null
       }
     },
     created() {
@@ -87,30 +106,36 @@
       },
       searchs(val) {
         this.list = JSON.parse(JSON.stringify(this.dataList))
-        if (val.length === 0) {
-          return
-        } else {
-          this.val = val.split(' ')
-          this.bianli()
-        }
-        this.grids = false
+        this.name = val
+        searchys(this.page.pageNum, this.page.pageSize, this.order, this.sort, this.type, this.name, this.latitude, this.longitude).then(response => {
+          this.factorData = response.data.dataList
+          this.factorData.forEach((item, index) => {
+            switch (item.type) {
+              case 'a':
+                item.icon = 'baseStation'
+                break
+              case 'b':
+                item.icon = 'wuzi'
+                break
+              case 'c':
+                item.icon = 'matou'
+                break
+              case 'd':
+                item.icon = 'haishi'
+                break
+              case 'e':
+                item.icon = 'baseStation'
+                break
+              case 'f':
+                item.icon = 'jk'
+                break
+            }
+          })
+        })
       },
       hide(active) {
         this.grids = active
         this.list = []
-      },
-      bianli() {
-        var num = []
-        this.list.forEach((item, index) => {
-          if (item.shipName.indexOf(this.val[0]) !== -1) {
-            num.push(item)
-          }
-        })
-        this.list = num
-        this.val.shift()
-        if (this.val.length > 0) {
-          this.bianli()
-        }
       },
       dingwei(string, name) {
         setTimeout(() => {
@@ -153,7 +178,7 @@
                 font-size: 20px;
               }
             }
-            span:nth-child(1) {
+            span:nth-child(2) {
               flex: 4;
             }
           }

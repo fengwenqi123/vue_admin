@@ -139,6 +139,12 @@
           if (e.data.act === 'shipManage') {
             _this.shipName = e.data.msg.name
             _this.aisList = e.data.msg.aisClass
+            _this.aisList.shipMessage = _this.aisList.shipMessage.substr(3)
+            if (_this.aisList.shipMessage.length > 9) {
+              _this.aisList.shipMessage = `GPS${_this.aisList.shipMessage}`
+            } else {
+              _this.aisList.shipMessage = `AIS${_this.aisList.shipMessage}`
+            }
           }
         }, false)
       },

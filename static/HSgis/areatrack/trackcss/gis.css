@@ -41,3 +41,15 @@ input[type='button'] {
   bottom: 29px;
   right: 0px;
 }
+#DZDT, #YXT{
+  padding: 4px 12px;
+  background: #fff;
+  color: #000;
+}
+.times p{
+  width: 100px;
+  display: inline-block;
+}
+.times .time{
+  display: inline-block;
+}

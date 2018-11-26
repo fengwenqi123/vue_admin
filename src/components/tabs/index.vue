@@ -1,5 +1,27 @@
 <template>
   <el-tabs type="border-card">
+    <el-tab-pane label="信号">
+      <el-scrollbar class="scrolls">
+        <el-row>
+          <el-col :span="12"><span>信号接收时间</span></el-col>
+          <el-col :span="12"><span>{{ais.receiveTime}}</span></el-col>
+          <el-col :span="12"><span>航向</span></el-col>
+          <el-col :span="12"><span>{{ais.shipDirection}}</span></el-col>
+          <el-col :span="12"><span>纬度</span></el-col>
+          <el-col :span="12"><span>{{ais.shipLat}}</span></el-col>
+          <el-col :span="12"><span>经度</span></el-col>
+          <el-col :span="12"><span>{{ais.shipLon}}</span></el-col>
+          <el-col :span="12"><span>船舶信息</span></el-col>
+          <el-col :span="12"><span>{{ais.shipMessage}}</span></el-col>
+          <el-col :span="12"><span>船舶名称</span></el-col>
+          <el-col :span="12"><span>{{ais.shipName}}</span></el-col>
+          <el-col :span="12"><span>速度</span></el-col>
+          <el-col :span="12"><span>{{ais.shipSpeed}}</span></el-col>
+          <el-col :span="12"><span>船艏向</span></el-col>
+          <el-col :span="12"><span>{{ais.shipheadDirection}}</span></el-col>
+        </el-row>
+      </el-scrollbar>
+    </el-tab-pane>
     <el-tab-pane label="船舶违章处罚信息">
       <el-scrollbar class="scrolls">
         <el-row v-for="(item,index) in chufaList" :key="index">
@@ -83,28 +105,6 @@
           <el-col :span="12"><span>{{shipxinxi.aflgrq}}</span></el-col>
           <el-col :span="12"><span>龙骨以上最大高度</span></el-col>
           <el-col :span="12"><span>{{shipxinxi.lgyszdgd}}</span></el-col>
-        </el-row>
-      </el-scrollbar>
-    </el-tab-pane>
-    <el-tab-pane label="AIS">
-      <el-scrollbar class="scrolls">
-        <el-row>
-          <el-col :span="12"><span>信号接收时间</span></el-col>
-          <el-col :span="12"><span>{{ais.receiveTime}}</span></el-col>
-          <el-col :span="12"><span>航向</span></el-col>
-          <el-col :span="12"><span>{{ais.shipDirection}}</span></el-col>
-          <el-col :span="12"><span>纬度</span></el-col>
-          <el-col :span="12"><span>{{ais.shipLat}}</span></el-col>
-          <el-col :span="12"><span>经度</span></el-col>
-          <el-col :span="12"><span>{{ais.shipLon}}</span></el-col>
-          <el-col :span="12"><span>船舶信息</span></el-col>
-          <el-col :span="12"><span>{{ais.shipMessage}}</span></el-col>
-          <el-col :span="12"><span>船舶名称</span></el-col>
-          <el-col :span="12"><span>{{ais.shipName}}</span></el-col>
-          <el-col :span="12"><span>速度</span></el-col>
-          <el-col :span="12"><span>{{ais.shipSpeed}}</span></el-col>
-          <el-col :span="12"><span>船艏向</span></el-col>
-          <el-col :span="12"><span>{{ais.shipheadDirection}}</span></el-col>
         </el-row>
       </el-scrollbar>
     </el-tab-pane>

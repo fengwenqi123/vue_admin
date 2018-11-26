@@ -140,22 +140,6 @@ export default new Router({
 })
 export const asyncRouterMap = [
   {
-    path: '/cruise',
-    component: Layout,
-    alwaysShow: true,
-    redirect: '/cruise/cruise',
-    name: 'cruise',
-    meta: {title: '一键巡航', icon: 'example', roles: ['cbgl']},
-    children: [
-      {
-        path: 'cruise',
-        name: 'cruise',
-        component: () => import('@/views/cruise/index'),
-        meta: {title: '一键巡航', icon: 'tree', roles: ['cbgl:bgdjcb']}
-      }
-    ]
-  },
-  {
     path: '/shipManage',
     component: Layout,
     alwaysShow: true,
@@ -244,6 +228,24 @@ export const asyncRouterMap = [
     meta: {title: '动态监管', icon: 'example', roles: ['dtjg']},
     children: [
       {
+        path: 'cruise',
+        name: 'cruise',
+        component: () => import('@/views/cruise/index'),
+        meta: {title: '一键巡查', icon: 'tree', roles: ['cbgl:bgdjcb']}
+      },
+      {
+        path: 'FieldCruise',
+        name: 'FieldCruise',
+        component: () => import('@/views/securityManagement/FieldCruise'),
+        meta: {title: '现场巡航', icon: 'tree', roles: ['aqjg:xcxh']}
+      },
+      {
+        path: 'ElectronicCruise',
+        name: 'ElectronicCruise',
+        component: () => import('@/views/ElectronicCruise/index'),
+        meta: {title: '非现场巡航', icon: 'tree', roles: ['dtjg:dzxh']}
+      },
+      {
         path: 'supervision',
         name: 'supervision',
         component: () => import('@/views/supervision/index'),
@@ -274,12 +276,6 @@ export const asyncRouterMap = [
         name: 'NavigationMon',
         component: () => import('@/views/NavigationMon/index'),
         meta: {title: '通航监测预警', icon: 'tree', roles: ['dtjg:thjcyj']}
-      },
-      {
-        path: 'ElectronicCruise',
-        name: 'ElectronicCruise',
-        component: () => import('@/views/ElectronicCruise/index'),
-        meta: {title: '电子巡航', icon: 'tree', roles: ['dtjg:dzxh']}
       },
       // {
       //   path: 'trafficStatistics',
@@ -341,7 +337,13 @@ export const asyncRouterMap = [
         path: 'restrictedArea',
         name: 'restrictedArea',
         component: () => import('@/views/NavigationManagement/restrictedArea'),
-        meta: {title: '禁限航区/安全作业区', icon: 'tree', roles: ['thgl:jxhq']}
+        meta: {title: '禁限航区', icon: 'tree', roles: ['thgl:jxhq']}
+      },
+      {
+        path: 'security',
+        name: 'security',
+        component: () => import('@/views/NavigationManagement/security'),
+        meta: {title: '安全作业区', icon: 'tree', roles: ['thgl:jxhq']}
       },
       {
         path: 'NavigationalWarning',
@@ -507,12 +509,6 @@ export const asyncRouterMap = [
         name: 'shipSafety',
         component: () => import('@/views/securityManagement/shipSafety'),
         meta: {title: '船舶安全检查', icon: 'tree', roles: ['aqjg:cbaqjc']}
-      },
-      {
-        path: 'FieldCruise',
-        name: 'FieldCruise',
-        component: () => import('@/views/securityManagement/FieldCruise'),
-        meta: {title: '现场巡航', icon: 'tree', roles: ['aqjg:xcxh']}
       }
     ]
   },
@@ -666,6 +662,12 @@ export const asyncRouterMap = [
         name: 'MouthManagement',
         component: () => import('@/views/SectionManagement/index'),
         meta: {title: '卡口管理', icon: 'tree', roles: ['jcyq:kkgl']}
+      },
+      {
+        path: 'JurisdictionManagement',
+        name: 'JurisdictionManagement',
+        component: () => import('@/views/SectionManagement/JurisdictionManagement'),
+        meta: {title: '辖区管理', icon: 'tree', roles: ['jcyq:kkgl']}
       }
     ]
   },

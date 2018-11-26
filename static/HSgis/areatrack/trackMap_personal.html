@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>区域轨迹</title>
+  <title>船舶轨迹</title>
   <link rel="stylesheet" type="text/css" href="../gis/css/ol.css"/>
   <link rel="stylesheet" type="text/css" href="trackcss/gis.css"/>
   <link rel="stylesheet" type="text/css" href="trackcss/olpopup.css"/>
@@ -30,25 +30,26 @@
   <div class="yaosu">
     <div class="list"
          style="position: fixed; left: 26px;  background: #fff; display: inline-block;padding: 10px;">
-      <p style="color: #ccc;">船名：</p>
-      <div class="ship">
-        <el-input v-model="shipName" placeholder="请输入船名"></el-input>
+      <p style="color: #ccc; display: inline-block; width: 100px;">船名：</p>
+      <div class="ship" style="display: inline-block;">
+        <el-input v-model="shipName" placeholder="请输入船名" style="width: 200px;"></el-input>
       </div>
-      <br>
-      <p style="color: #ccc;">起止时间：</p>
-      <div class="time">
-        <el-date-picker
-          v-model="value4"
-          type="datetimerange"
-          range-separator="至"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期">
-        </el-date-picker>
+      <div class="times">
+        <p style="color: #ccc; margin-top: 20px;">起止时间：</p>
+        <div class="time">
+          <el-date-picker
+            v-model="value4"
+            type="datetimerange"
+            range-separator="至"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+        </div>
       </div>
       <div class="buttons" style="margin-top: 15px;">
         <el-row>
-          <img src="./img/play.png" alt="" style="cursor: pointer;width: 45px; margin-left: 15px;background: #fff;"
+          <img src="./img/play.png" alt="" style="cursor: pointer;width: 45px; margin-left: 100px;background: #fff;"
                @click="startPlays">
         </el-row>
       </div>

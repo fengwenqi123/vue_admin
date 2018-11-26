@@ -67,7 +67,9 @@
     },
     methods: {
       ship() {
-        this.checkedCities = getShip().split(',')
+        if (getShip()) {
+          this.checkedCities = getShip().split(',')
+        }
       },
       handleCheckAllChange(val) {
         console.log(val)

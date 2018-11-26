@@ -37,7 +37,7 @@
     methods: {
       handleLogin() {
         var test = window.location.href
-        window.location.href = `http://172.26.24.160/casZjgh/login?service=${test}`
+        window.location.href = `http://59.202.42.57:8080/casZjgh?service=${test}`
       },
       geturl() {
         var test = window.location.href
@@ -47,7 +47,7 @@
           this.login()
         } else {
           var test = window.location.href
-          window.location.href = `http://172.26.24.160/casZjgh/login?service=${test}`
+          window.location.href = `http://59.202.42.57:8080/casZjgh?service=${test}`
         }
       },
       login() {

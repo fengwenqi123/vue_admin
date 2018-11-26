@@ -94,6 +94,7 @@ export function getRoleArr() {
     url: '/account/role',
     method: 'GET',
     params: {
+      'pageSize': 5000,
       'status': 1
     }
   })

@@ -10,8 +10,8 @@
           <span v-if="item.layer && item.layer.length==3" v-text="item.name"></span>
           <span v-if="item.layer && item.layer.length==6" v-text="'　┝ '+item.name"></span>
           <span v-if="item.layer && item.layer.length==9" v-text="'　　┝ '+item.name"></span>
-          <span v-if="item.layer && item.layer.length==12" v-text="'　　　┝ '+item.name"></span>
-          <span v-if="item.layer && item.layer.length==15" v-text="'　　　　┝ '+item.name"></span>
+          <span v-if="item.layer && item.layer.length==12" v-text="'　　　　┝ '+item.name"></span>
+          <span v-if="item.layer && item.layer.length==15" v-text="'　　　　　　┝ '+item.name"></span>
         </option>
       </select>
     </div>

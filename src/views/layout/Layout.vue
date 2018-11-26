@@ -61,6 +61,7 @@
   @import "src/styles/mixin.scss";
 
   .app-wrapper {
+    background: #01579b;
     /*.nav, .tag, .appmain {*/
     /*width: 100%;*/
     /*position: fixed;*/

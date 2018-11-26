@@ -33,12 +33,13 @@
             </el-table-column>
             <el-table-column
               prop="violationDate"
-              width="400"
+              show-overflow-tooltip
               label="违章时间">
             </el-table-column>
             <el-table-column
               prop="addDate"
-              width="120"
+              width="160"
+              show-overflow-tooltip
               label="违章录入时间">
             </el-table-column>
             <el-table-column
@@ -48,6 +49,8 @@
             </el-table-column>
             <el-table-column
               prop="gcvTypeName"
+              width="250"
+              show-overflow-tooltip
               label="违章类型">
             </el-table-column>
             <el-table-column
@@ -58,12 +61,12 @@
             <el-table-column
               prop="flag"
               label="违章标记"
-              width="180">
+              >
             </el-table-column>
             <el-table-column
               prop="status"
               label="处理状态"
-              width="180">
+              >
             </el-table-column>
           </el-table>
         </div>
@@ -104,7 +107,7 @@
           total: 0
         },
         sort: '',
-        status: 0,
+        status: '',
         keyword: '',
         show: true,
         tableData: [],
