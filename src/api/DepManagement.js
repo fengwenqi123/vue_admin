@@ -18,7 +18,11 @@ export function lists(pageNum, pageSize, order, sort, status, keyword) {
 
 export function add(id, supLayer, code, name, description) {
   const data = qs.stringify({
-    id, supLayer, code, name, description
+    id,
+    supLayer,
+    code,
+    name,
+    description
   })
   return request({
     url: '/account/department',
@@ -45,5 +49,12 @@ export function findDep() {
       'sort': '',
       'status': 1
     }
+  })
+}
+
+export function findDepName(id) {
+  return request({
+    url: '/account/department' + id,
+    method: 'GET'
   })
 }

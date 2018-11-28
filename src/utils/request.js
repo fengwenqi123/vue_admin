@@ -1,13 +1,13 @@
 /* eslint-disable object-curly-spacing */
 import axios from 'axios'
-import {Message, MessageBox} from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import store from '../store'
-import {getToken} from '@/utils/auth'
+import { getToken } from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
-  // baseURL: 'http://192.168.1.207:8001', // api的base_url
-  baseURL: 'http://10.100.70.226:80/api', // api的base_url
+  baseURL: 'http://192.168.1.207:8001', // api的base_url
+  // baseURL: 'http://10.100.70.226:80/api', // api的base_url
   timeout: 10000 // 请求超时时间
 })
 
@@ -27,8 +27,8 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     /**
-     * code为非20000是抛错 可结合自己业务进行修改
-     */
+         * code为非20000是抛错 可结合自己业务进行修改
+         */
     const res = response.data
     if (res.code !== 200) {
       Message({
@@ -44,7 +44,7 @@ service.interceptors.response.use(
           type: 'warning'
         }).then(() => {
           store.dispatch('FedLogOut').then(() => {
-            location.reload()// 为了重新实例化vue-router对象 避免bug
+            location.reload() // 为了重新实例化vue-router对象 避免bug
           })
         })
       }
@@ -54,7 +54,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error)// for debug
+    console.log('err' + error) // for debug
     Message({
       message: error.message,
       type: 'error',
