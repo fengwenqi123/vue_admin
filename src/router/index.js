@@ -682,7 +682,7 @@ export const asyncRouterMap = [{
     path: 'StatutoryReport',
     name: 'StatutoryReport',
     component: () =>
-                    import('@/views/decisionAnalysis/StatutoryReport'),
+                    import('@/views/decisionAnalysis/StatutoryReport/index'),
     meta: { title: '法定报表', icon: 'tree', roles: ['jcfx:fdbb'] }
   }
   ]
